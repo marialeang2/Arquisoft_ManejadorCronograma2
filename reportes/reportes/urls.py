@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from generarreportes import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('home/', views.home),
+    path('', views.buscarReporteId, name='buscarReporteId'),
+    path('GETReporte/<int:pk>', views.buscarReporteId, name='buscarReporteId'),
 ]
