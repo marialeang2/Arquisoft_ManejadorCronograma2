@@ -20,6 +20,7 @@ from generarreportes import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
-    path('', views.buscarReporteId, name='buscarReporteId'),
-    path('GETReporte/<int:pk>', views.buscarReporteId, name='buscarReporteId'),
+    path('POSTReporte/<str:pk>', views.buscarReporteId, name='buscarReporteId'),
+    path('reporte/<str:nombre_estudiante>/', views.generar_reporte, name='generar_reporte')
+
 ]
