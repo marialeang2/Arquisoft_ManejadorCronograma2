@@ -20,7 +20,6 @@ from generarreportes import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
-    path('POSTReporte/<str:pk>', views.buscarReporteId, name='buscarReporteId'),
-    path('reporte/<str:nombre_estudiante>/', views.generar_reporte, name='generar_reporte')
+    path('cronograma/<str:nombre_cronograma>/<int:anio_cronograma>', views.generar_lista_correos, name='generar_lista_correos')
 
 ]
