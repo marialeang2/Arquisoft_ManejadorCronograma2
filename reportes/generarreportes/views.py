@@ -1,16 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from reportes.logic import logic_reportes
-from django.core import serializers
-from generarreportes.models import Reporte, Estudiante, Pago
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
+from django.http import HttpResponse
 from reportes.logic import logic_cronogramas, logic_pagos
-import json
-from django.shortcuts import render
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
-from reportlab.lib import colors
 from reportes.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
@@ -72,7 +64,7 @@ def generar_lista_correos (request):
 
 def send_email(receptor,responsable,fecha,concepto):
     subject = f"{responsable} Pago {concepto} de {fecha} "
-    message = 'Su pago debe ser realizado prongamente'
+    message = 'Su pago debe ser realizado prontamente'
     recepient = receptor
     send_mail(subject, message, EMAIL_HOST_USER, [recepient])
 
