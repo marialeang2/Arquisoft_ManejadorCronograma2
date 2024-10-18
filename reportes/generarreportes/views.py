@@ -65,7 +65,7 @@ def generar_lista_correos (request):
 def send_email(receptor,responsable,fecha,concepto):
     subject = f"{responsable} Pago {concepto} de {fecha} "
     message = 'Su pago debe ser realizado prontamente'
-    recepient = 'sofimur75@gmail.com'
+    recepient = receptor
     send_mail(subject, message, EMAIL_HOST_USER, [recepient])
 
 
