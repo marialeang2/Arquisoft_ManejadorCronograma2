@@ -22,12 +22,12 @@ def formulario_view(request):
 def generar_lista_correos (request):
      if request.method == 'GET':
       data = request.GET
-      anioCronograma = data['anio']
-      nombreCronograma = data['nombrecronograma']
-      fecha_pago = data['fecha_pago']
+      anioCronograma = request.GET.get('anio', '2024')
+      nombreCronograma = request.GET.get('nombrecronograma', 'Cronograma Matemáticas 2024')
+      fecha_pago = request.GET.get('fecha_pago', '2024-01-01')
       
       cronograma = logic_cronogramas.traerCronograma(anioCronograma, nombreCronograma)
-      pagos = logic_pagos.traerPagos(cronograma, fecha_pago)
+      pagos = logic_pagos.traerPagos(cronograma.id, fecha_pago)
       correos = []
      
       response = HttpResponse(content_type='application/pdf')
@@ -60,12 +60,12 @@ def generar_lista_correos (request):
           y = 800
 
       pdf.save()
-      return correos, response
+      return response
 
 def send_email(receptor,responsable,fecha,concepto):
     subject = f"{responsable} Pago {concepto} de {fecha} "
     message = 'Su pago debe ser realizado prontamente'
-    recepient = receptor
+    recepient = 'sofimur75@gmail.com'
     send_mail(subject, message, EMAIL_HOST_USER, [recepient])
 
 
