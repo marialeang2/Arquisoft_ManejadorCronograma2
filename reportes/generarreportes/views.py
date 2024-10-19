@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from datetime import timedelta
 import producer
-
+from django.http import JsonResponse
 
 def home(request):
     return HttpResponse("Hello world Django views")
@@ -74,9 +74,8 @@ def send_email(receptor,responsable,fecha,concepto):
 @csrf_exempt
 def publicarPagos(request):
    pagos = logic_cronogramas.cronogramaPagos()
-
    for p in pagos:
       mensaje = 'Su pago debe ser realizado prontamente, Pago: {p.nombre}, Fecha: {p.fecha}'
       producer.publish_message(mensaje)
-
+   return JsonResponse({'pagos_procesados': len(pagos)})
       
