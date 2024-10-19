@@ -16,13 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from generarreportes import views
-from . import views
+from . import views as v
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
     path('cronograma/', views.generar_lista_correos, name='generar_lista_correos'),
     path('', views.formulario_view, name='formulario_view'),
-    path('health/', views.health_check, name='health')
+    path('health/', v.health_check, name='health')
 
 ]
