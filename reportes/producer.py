@@ -39,7 +39,7 @@ while True:
     # Publicar el mensaje en la cola
     for p in pagos:
         message = {
-        'fecha': 'Su pago debe ser realizado prontamente'
+        'Mensaje': 'Su pago debe ser realizado prontamente'
         }
         channel.basic_publish(exchange=exchange, routing_key=topic, body=json.dumps(message)) 
     
