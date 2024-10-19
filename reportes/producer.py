@@ -23,7 +23,7 @@ django.setup()
 from reportes.logic.logic_cronogramas import cronogramaPagos
 
 while True:
-    pagos = cronogramaPagos
+    pagos = cronogramaPagos()
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=rabbit_host, credentials=pika.PlainCredentials(rabbit_user, rabbit_password))
     )
@@ -46,6 +46,6 @@ while True:
     print(f"[x] Mensaje enviado: {message}")
 
     time.sleep(5)
-    
+
 connection.close()
 
