@@ -13,8 +13,7 @@ rabbit_user = 'losarquis_user'
 rabbit_password = '1234'
 exchange = 'cronogramas_pagos'
 topic = 'Cronograma'
-queue_name = 'pagos_queue'
-queue_name = 'pagos_queue'
+
 
 path.append('reportes/settings.py')
 environ.setdefault('DJANGO_SETTINGS_MODULE', 'reportes.settings')
@@ -39,8 +38,8 @@ while True:
         'fecha': p.fecha,
         'concepto': p.nombre,
         }
-        channel.basic_publish(exchange='',
-                            routing_key=queue_name,
+        channel.basic_publish(exchange=exchange,
+                          routing_key=topic,
                             body=message)  # Convertir el mensaje a JSON
     
     print(f"[x] Mensaje enviado: {message}")
