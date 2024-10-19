@@ -72,7 +72,7 @@ def send_email(receptor,responsable,fecha,concepto):
     send_mail(subject, message, EMAIL_HOST_USER, [recepient])
 
 @csrf_exempt
-def publicarPagos():
+def publicarPagos(request):
    pagos = logic_cronogramas.cronogramaPagos()
 
    for p in pagos:
