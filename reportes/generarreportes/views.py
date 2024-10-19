@@ -6,6 +6,9 @@ from reportlab.pdfgen import canvas
 from reportes.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
+from datetime import timedelta
+import producer
 
 
 def home(request):
@@ -69,5 +72,11 @@ def send_email(receptor,responsable,fecha,concepto):
     send_mail(subject, message, EMAIL_HOST_USER, [recepient])
 
 
-     
-     
+def publicarPagos():
+   pagos = logic_cronogramas.cronogramaPagos()
+
+   for p in pagos:
+      mensaje = 'Su pago debe ser realizado prontamente, Pago: {pago.nombre}, Fecha: {pago.fecha}'
+      producer.publish_message(mensaje)
+
+      
