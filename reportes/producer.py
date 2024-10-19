@@ -2,7 +2,7 @@
 import time
 import pika
 from random import uniform
-from reportes.logic.logic_cronogramas import cronogramaPagos
+
 import json
 from sys import path
 from os import environ
@@ -19,6 +19,8 @@ queue_name = 'pagos_queue'
 path.append('reportes/settings.py')
 environ.setdefault('DJANGO_SETTINGS_MODULE', 'reportes.settings')
 django.setup()
+
+from reportes.logic.logic_cronogramas import cronogramaPagos
 
 def publish_message(correo, responsable, fecha, concepto):
     # Crear el mensaje en formato JSON
