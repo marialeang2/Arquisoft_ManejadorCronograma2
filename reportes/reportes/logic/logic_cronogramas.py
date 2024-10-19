@@ -9,5 +9,5 @@ def traerCronograma(anio,nombre):
 def cronogramaPagos( ):
     hoy = timezone.now().date()
     fecha_limite = hoy + timedelta(days=2)
-    pagos_proximos = Pago.objects.filter(fecha_corte__range=[hoy, fecha_limite]).all()
+    pagos_proximos = Pago.objects.filter(fecha__range=[hoy, fecha_limite]).all()
     return pagos_proximos
