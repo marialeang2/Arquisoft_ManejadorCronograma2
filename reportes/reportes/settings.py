@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0@b!b23^1*#fh!d$rtdz+4!9v8&acahcr2wc119be%iw2$d*s+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,14 +76,14 @@ WSGI_APPLICATION = 'reportes.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        #'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': 'basedatos_udb',
-        #'USER': 'usuario_db',
-        #'PASSWORD': 'pase_db',
-        #'HOST': 'localhost',
-        #'PORT': '5432',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db_instance',
+        'USER': 'losarquis_user',
+        'PASSWORD': '1234',
+        'HOST': '10.128.0.52',
+        'PORT': '5432',
     }
 }
 
