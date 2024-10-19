@@ -42,7 +42,7 @@ while True:
                           routing_key=topic,
                             body=message)  # Convertir el mensaje a JSON
     
-    print(f"[x] Mensaje enviado: {message}")
+        print(f"[x] Mensaje enviado: {message}")
 
     time.sleep(5)
 
