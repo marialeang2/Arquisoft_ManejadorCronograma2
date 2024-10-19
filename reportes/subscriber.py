@@ -34,7 +34,7 @@ print('> Esperando pagos. To exit press CTRL+C')
 
 
 def callback(ch, method, properties, body):
-    payload = json.loads(body.decode('utf8').replace("'", '"'))
+    message = json.loads(body.decode('utf8').replace("'", '"'))
     #topic = method.routing_key.split('.')
     #variable = get_variable(topic[2])
     #create_measurement_object(
@@ -42,10 +42,10 @@ def callback(ch, method, properties, body):
     #if variable.name == 'Temperature':
     #    check_alarm(payload['value'])
     #print("Measurement :%r" % (str(payload)))
-    receptor = payload['Correo']
-    responsable = payload['Responsable']
-    fecha = payload['Fecha']
-    concepto = payload['Mensaje']
+    receptor = message['Correo']
+    responsable = message['Responsable']
+    fecha = message['Fecha']
+    concepto = message['Mensaje']
     send_email(receptor, responsable, fecha, concepto)
     print(f"[x] Recibido {body}")
 
