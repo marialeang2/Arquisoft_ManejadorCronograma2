@@ -38,9 +38,7 @@ while True:
         'fecha': p.fecha,
         'concepto': p.nombre,
         }
-        channel.basic_publish(exchange=exchange,
-                          routing_key=topic,
-                            body=message)  # Convertir el mensaje a JSON
+        channel.basic_publish(exchange=exchange, routing_key=topic, body=message) 
     
         print(f"[x] Mensaje enviado: {message}")
 
