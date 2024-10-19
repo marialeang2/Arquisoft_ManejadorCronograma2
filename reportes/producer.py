@@ -32,14 +32,12 @@ print('> Sending measurements. To exit press CTRL+C')
 while True:
     pagos = cronogramaPagos()
     
-
-    # Declarar la cola (asegúrate de que la cola existe)
-    #channel.queue_declare(queue=queue_name)
-
-    # Publicar el mensaje en la cola
     for p in pagos:
         message = {
-        'Mensaje': 'Su pago debe ser realizado prontamente'
+        'Mensaje': {p.nombre},
+        'Correo': {p.responsableF.correo},
+        'Fecha': {p.fecha},
+        'Responsable': {p.responsableF.nombre}
         }
         channel.basic_publish(exchange=exchange, routing_key=topic, body=json.dumps(message)) 
     

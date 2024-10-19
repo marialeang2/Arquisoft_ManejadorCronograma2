@@ -15,7 +15,7 @@ path.append('reportes/settings.py')
 environ.setdefault('DJANGO_SETTINGS_MODULE', 'reportes.settings')
 django.setup()
 
-
+from generarreportes.services import send_email
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host=rabbit_host, credentials=pika.PlainCredentials(rabbit_user, rabbit_password)))
@@ -34,7 +34,7 @@ print('> Esperando pagos. To exit press CTRL+C')
 
 
 def callback(ch, method, properties, body):
-    #payload = json.loads(body.decode('utf8').replace("'", '"'))
+    payload = json.loads(body.decode('utf8').replace("'", '"'))
     #topic = method.routing_key.split('.')
     #variable = get_variable(topic[2])
     #create_measurement_object(
@@ -42,6 +42,11 @@ def callback(ch, method, properties, body):
     #if variable.name == 'Temperature':
     #    check_alarm(payload['value'])
     #print("Measurement :%r" % (str(payload)))
+    receptor = payload['Correo']
+    responsable = payload['Responsable']
+    fecha = payload['Fecha']
+    concepto = payload['Mensaje']
+    send_email(receptor, responsable, fecha, concepto)
     print(f"[x] Recibido {body}")
 
 channel.basic_consume(
