@@ -22,11 +22,8 @@ django.setup()
 
 from reportes.logic.logic_cronogramas import cronogramaPagos
 
-def publish_message(message):
-    # Crear el mensaje en formato JSON
-    
-    
-    # Conectar a RabbitMQ
+while True:
+    pagos = cronogramaPagos
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=rabbit_host, credentials=pika.PlainCredentials(rabbit_user, rabbit_password))
     )
@@ -37,10 +34,18 @@ def publish_message(message):
     channel.queue_declare(queue=queue_name)
 
     # Publicar el mensaje en la cola
-    channel.basic_publish(exchange='',
-                          routing_key=queue_name,
-                          body=message)  # Convertir el mensaje a JSON
+    for p in pagos:
+        message = {
+        'fecha': p.fecha,
+        'concepto': p.nombre,
+        }
+        channel.basic_publish(exchange='',
+                            routing_key=queue_name,
+                            body=message)  # Convertir el mensaje a JSON
     
     print(f"[x] Mensaje enviado: {message}")
-    connection.close()
+
+    time.sleep(5)
+    
+connection.close()
 
