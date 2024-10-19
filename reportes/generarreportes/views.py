@@ -71,7 +71,7 @@ def send_email(receptor,responsable,fecha,concepto):
     recepient = receptor
     send_mail(subject, message, EMAIL_HOST_USER, [recepient])
 
-
+@csrf_exempt
 def publicarPagos():
    pagos = logic_cronogramas.cronogramaPagos()
 
