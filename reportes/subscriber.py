@@ -11,7 +11,7 @@ exchange = 'cronogramas_pagos'
 topics = ['Cronograma.#']
 
 
-#path.append('monitoring/settings.py')
+path.append('reportes/settings.py')
 environ.setdefault('DJANGO_SETTINGS_MODULE', 'monitoring.settings')
 django.setup()
 
