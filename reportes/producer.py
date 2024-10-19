@@ -47,7 +47,3 @@ def publish_message(correo, responsable, fecha, concepto):
     print(f"[x] Mensaje enviado: {message}")
     connection.close()
 
-# Ejemplo de uso
-if _name_ == "_main_":
-    # Aquí puedes definir algunos datos de ejemplo para enviar
-    publish_message('ejemplo@correo.com', 'Juan Pérez', '2024-01-01', 'Pago de matrícula')
