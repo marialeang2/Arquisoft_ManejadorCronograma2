@@ -34,10 +34,10 @@ while True:
     
     for p in pagos:
         message = {
-        'Mensaje': {p.nombre},
-        'Correo': {p.responsableF.correo},
-        'Fecha': {p.fecha},
-        'Responsable': {p.responsableF.nombre}
+        'Mensaje': p.nombre,
+        'Correo': p.responsableF.correo,
+        'Fecha': p.fecha,
+        'Responsable': p.responsableF.nombre
         }
         channel.basic_publish(exchange=exchange, routing_key=topic, body=json.dumps(message)) 
     
