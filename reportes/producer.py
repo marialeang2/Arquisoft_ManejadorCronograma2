@@ -33,7 +33,7 @@ while True:
     pagos = cronogramaPagos()
     
     for p in pagos:
-        message = "{'Mensaje': %r, 'Correo': %r, 'Fecha': %r,'Responsable': '%r'}" % (p.nombre, p.responsableF.correo, p.fecha, p.responsableF.nombre)
+        message = "{'mensaje': %r, 'correo': %r, 'fecha': %r,'responsable': '%r'}" % (p.nombre, p.responsableF.correo, p.fecha, p.responsableF.nombre)
         channel.basic_publish(exchange=exchange, routing_key=topic, body=message) 
     
         print(f"[x] Mensaje enviado: {message}")
