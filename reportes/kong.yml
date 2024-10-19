@@ -1,0 +1,38 @@
+_format_version: "2.1"
+
+services:
+  - host: cronograma_upstream
+    name: cronograma_service
+    protocol: http
+    routes:
+      
+      - name: cronograma
+        paths:
+          - /
+          - /cronograma/
+        strip_path: false
+    
+upstreams:
+  - name: cronograma_upstream
+    targets:
+      - target: 10.128.0.53:8080
+        weight: 100
+      - target: 10.128.0.54:8080
+        weight: 100
+      - target: 10.128.0.55:8080
+        weight: 100
+      - target: 10.128.0.56:8080
+        weight: 100
+
+    healthchecks:
+      threshold: 90
+      active:
+        http_path: /health/
+        timeout: 5
+        healthy:
+          successes: 3
+          interval: 5
+        unhealthy:
+          tcp_failures: 3
+          interval: 5
+
