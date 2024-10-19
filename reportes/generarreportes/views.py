@@ -76,7 +76,7 @@ def publicarPagos():
    pagos = logic_cronogramas.cronogramaPagos()
 
    for p in pagos:
-      mensaje = 'Su pago debe ser realizado prontamente, Pago: {pago.nombre}, Fecha: {pago.fecha}'
+      mensaje = 'Su pago debe ser realizado prontamente, Pago: {p.nombre}, Fecha: {p.fecha}'
       producer.publish_message(mensaje)
 
       
