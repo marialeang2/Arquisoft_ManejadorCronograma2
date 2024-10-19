@@ -43,7 +43,7 @@ while True:
     
         print(f"[x] Mensaje enviado: {message}")
 
-    time.sleep(5)
+    time.sleep(15)
 
 connection.close()
 
