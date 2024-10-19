@@ -22,14 +22,9 @@ django.setup()
 
 from reportes.logic.logic_cronogramas import cronogramaPagos
 
-def publish_message(correo, responsable, fecha, concepto):
+def publish_message(message):
     # Crear el mensaje en formato JSON
-    message = {
-        'correo': correo,
-        'responsable': responsable,
-        'fecha': fecha,
-        'concepto': concepto,
-    }
+    
     
     # Conectar a RabbitMQ
     connection = pika.BlockingConnection(
@@ -44,7 +39,7 @@ def publish_message(correo, responsable, fecha, concepto):
     # Publicar el mensaje en la cola
     channel.basic_publish(exchange='',
                           routing_key=queue_name,
-                          body=json.dumps(message))  # Convertir el mensaje a JSON
+                          body=message)  # Convertir el mensaje a JSON
     
     print(f"[x] Mensaje enviado: {message}")
     connection.close()
