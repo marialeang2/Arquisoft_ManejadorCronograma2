@@ -18,13 +18,17 @@ topic = 'Cronograma'
 
 from reportes.logic.logic_cronogramas import cronogramaPagos
 
-while True:
-    pagos = cronogramaPagos()
-    connection = pika.BlockingConnection(
+connection = pika.BlockingConnection(
         pika.ConnectionParameters(host=rabbit_host, credentials=pika.PlainCredentials(rabbit_user, rabbit_password))
     )
     
-    channel = connection.channel()
+channel = connection.channel()
+channel.exchange_declare(exchange=exchange, exchange_type='topic')
+print('> Sending measurements. To exit press CTRL+C')
+
+while True:
+    pagos = cronogramaPagos()
+    
 
     # Declarar la cola (asegúrate de que la cola existe)
     #channel.queue_declare(queue=queue_name)
