@@ -12,7 +12,7 @@ topics = ['Cronograma.#']
 
 
 path.append('reportes/settings.py')
-environ.setdefault('DJANGO_SETTINGS_MODULE', 'monitoring.settings')
+environ.setdefault('DJANGO_SETTINGS_MODULE', 'reportes.settings')
 django.setup()
 
 
