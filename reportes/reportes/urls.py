@@ -21,8 +21,8 @@ from . import views as v
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', views.home),
-    path('cronograma/', views.generar_lista_correos, name='generar_lista_correos'),
-    path('', views.formulario_view, name='formulario_view'),
+    #path('cronograma/', views.publicarPagos, name='publicarpagos'),
+    path('', views.publicarPagos, name='publicarpagos'),
     path('health/', v.health_check, name='health')
 
 ]
