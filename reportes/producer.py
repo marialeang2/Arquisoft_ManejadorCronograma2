@@ -30,7 +30,7 @@ while True:
     channel = connection.channel()
 
     # Declarar la cola (asegúrate de que la cola existe)
-    channel.queue_declare(queue=queue_name)
+    #channel.queue_declare(queue=queue_name)
 
     # Publicar el mensaje en la cola
     for p in pagos:
