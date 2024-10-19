@@ -4,6 +4,9 @@ import pika
 from random import uniform
 from reportes.logic.logic_cronogramas import cronogramaPagos
 import json
+from sys import path
+from os import environ
+import django
 
 rabbit_host = '10.128.0.10'
 rabbit_user = 'losarquis_user'
@@ -12,6 +15,10 @@ exchange = 'cronogramas_pagos'
 topic = 'Cronograma'
 queue_name = 'pagos_queue'
 queue_name = 'pagos_queue'
+
+path.append('reportes/settings.py')
+environ.setdefault('DJANGO_SETTINGS_MODULE', 'reportes.settings')
+django.setup()
 
 def publish_message(correo, responsable, fecha, concepto):
     # Crear el mensaje en formato JSON
