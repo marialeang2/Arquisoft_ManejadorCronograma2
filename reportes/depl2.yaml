@@ -1,0 +1,36 @@
+resources:
+# Database instance
+  - type: compute.v1.instance
+    name: db-instance
+    properties:
+      zone: us-central1-a
+      machineType: https://www.googleapis.com/compute/v1/projects/proyectoarquisoft-438013/zones/us-central1-a/machineTypes/e2-micro
+      disks:
+      - deviceName: boot
+        type: PERSISTENT
+        boot: true
+        autoDelete: true
+        initializeParams:
+          sourceImage: https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20240307b
+      networkInterfaces:
+      - network: https://www.googleapis.com/compute/v1/projects/proyectoarquisoft-438013/global/networks/default
+        networkIP: 10.128.0.52
+        accessConfigs:
+        - name: External NAT
+          type: ONE_TO_ONE_NAT
+      tags:
+        items: 
+        - cbd-monitoring-db
+      metadata:
+        items:
+        - key: startup-script
+          value: |
+            #!/bin/bash
+            sudo apt-get update
+            sudo apt-get install -y postgresql postgresql-contrib
+            sudo -u postgres psql -c "CREATE USER losarquis_user WITH PASSWORD '1234';"
+            sudo -u postgres createdb -O losarquis_user db_instance
+            echo "host all all 0.0.0.0/0 trust" | sudo tee -a /etc/postgresql/12/main/pg_hba.conf
+            echo "listen_addresses='*'" | sudo tee -a /etc/postgresql/12/main/postgresql.conf
+            echo "max_connections=2000" | sudo tee -a /etc/postgresql/12/main/postgresql.conf
+            sudo service postgresql restart
