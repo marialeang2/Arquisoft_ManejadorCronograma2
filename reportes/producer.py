@@ -4,7 +4,7 @@ import pika
 from random import uniform
 from reportes.logic.logic_cronogramas import cronogramaPagos
 
-rabbit_host = 'host'
+rabbit_host = '10.128.0.10'
 rabbit_user = 'losarquis_user'
 rabbit_password = '1234'
 exchange = 'cronogramas_pagos'
