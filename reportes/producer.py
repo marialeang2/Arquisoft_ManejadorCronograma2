@@ -41,7 +41,7 @@ while True:
         message = {
         'fecha': 'Su pago debe ser realizado prontamente'
         }
-        channel.basic_publish(exchange=exchange, routing_key=topic, body=message) 
+        channel.basic_publish(exchange=exchange, routing_key=topic, body=json.dumps(message)) 
     
         print(f"[x] Mensaje enviado: {message}")
 
