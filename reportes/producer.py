@@ -15,6 +15,9 @@ exchange = 'cronogramas_pagos'
 topic = 'Cronograma'
 
 
+path.append('reportes/settings.py')
+environ.setdefault('DJANGO_SETTINGS_MODULE', 'reportes.settings')
+django.setup()
 
 from reportes.logic.logic_cronogramas import cronogramaPagos
 
